@@ -1,5 +1,5 @@
 ```markdown
-# medsent: A Comprehensive Framework for Sentiment Analysis of Medication Reviews
+#medsent: A Comprehensive Framework for Sentiment Analysis of Medication Reviews
 
 **Authors:**   Mohammad Yamen AL-Mohamad
 **Contact:** yamenmohamad@tabrizu.ac.ir  
@@ -8,7 +8,7 @@ This repository contains the official implementation of the methodology and expe
 
 ---
 
-## 📌 Overview
+##📌 Overview
 
 The framework integrates:
 
