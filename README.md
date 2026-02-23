@@ -1,7 +1,7 @@
 ```markdown
-medsent: A Comprehensive Framework for Sentiment Analysis of Medication Reviews
+**medsent: A Comprehensive Framework for Sentiment Analysis of Medication Reviews**
 
-Authors:   Mohammad Yamen AL-Mohamad
+Authors:   **Mohammad Yamen AL-Mohamad**
 Contact: yamenmohamad@tabrizu.ac.ir  
 
 This repository contains the official implementation of the methodology and experiments described in the thesis chapter *"Methodology and Experimental Results"*. The `medsent` package provides a modular, reproducible pipeline for predicting patient sentiment from free‑text medication reviews using a wide range of machine learning and deep learning models, including ensembles and transformer‑based architectures.
@@ -294,4 +294,3 @@ We also acknowledge the creators of the Drugs.com dataset and the providers of t
 
 For questions, issues, or contributions, please open an issue on GitHub or contact Mohammad Yamen at yamenmohamad@tabrizu.ac.ir.
 ```
- 
