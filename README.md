@@ -69,11 +69,7 @@ This installs all necessary libraries: `numpy`, `pandas`, `scikit-learn`, `nltk`
  Drugs.com Review Dataset
 
 The experiments use a publicly available dataset of medication reviews from Drugs.com.  
-Format: CSV file with columns `review` (text) and `rating` (integer 1–10).  
-Place it at: `data/drugscom_reviews.csv` (create the `data/` folder if needed).
-
-You can download the dataset from the [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/datasets/Drug+Review+Dataset+%28Drugs.com%29) (file `drugsCom_raw.zip`). After extraction, the file `drugsComTrain_raw.csv` contains the reviews. You may need to rename it and keep only the `review` and `rating` columns.
-
+ 
 Example preprocessing (already handled by the package):
 - Remove HTML tags, URLs, dosage mentions (e.g., "10mg").
 - Convert to lowercase.
