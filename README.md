@@ -275,22 +275,6 @@ If you use this code or the methodology in your research, please cite the origin
 This project is licensed under the MIT License – see the [LICENSE](LICENSE) file for details.
 
 ---
-
- 🙏 Acknowledgements
-
-We thank the developers of the open‑source libraries that made this work possible:
-
-- NumPy, pandas – data manipulation
-- scikit‑learn – traditional ML models and evaluation
-- NLTK – text preprocessing
-- Gensim – word2vec and embedding handling
-- TensorFlow / Keras – deep learning models
-- XGBoost – gradient boosting
-- Matplotlib / Seaborn – visualisation
-- HuggingFace Transformers – transformer models
-- PyTorch – backend for transformers
-
-We also acknowledge the creators of the Drugs.com dataset and the providers of the pre‑trained embeddings (GloVe, PubMed Word2Vec).
-
+ 
 For questions, issues, or contributions, please open an issue on GitHub or contact Mohammad Yamen at yamenmohamad@tabrizu.ac.ir.
 ```
