@@ -1,61 +1,61 @@
 ```markdown
-\medsent: A Comprehensive Framework for Sentiment Analysis of Medication Reviews
+#medsent: A Comprehensive Framework for Sentiment Analysis of Medication Reviews
 
-**Authors:**   Mohammad Yamen AL-Mohamad
-**Contact:** yamenmohamad@tabrizu.ac.ir  
+Authors:   Mohammad Yamen AL-Mohamad
+Contact: yamenmohamad@tabrizu.ac.ir  
 
 This repository contains the official implementation of the methodology and experiments described in the thesis chapter *"Methodology and Experimental Results"*. The `medsent` package provides a modular, reproducible pipeline for predicting patient sentiment from free‑text medication reviews using a wide range of machine learning and deep learning models, including ensembles and transformer‑based architectures.
 
 ---
 
-\\📌 Overview
+##📌 Overview
 
 The framework integrates:
 
-- **Data processing**: loading, labeling (binary/ternary/10‑class), text cleaning, stemming, stopword removal.
-- **Feature extraction**: Bag‑of‑Words, TF‑IDF, n‑grams, averaged word embeddings (GloVe, PubMed, concatenated), sequence embeddings for deep models.
-- **Traditional ML models**: Logistic Regression, SVM (linear/RBF), Random Forest, XGBoost, Naïve Bayes, k‑NN, LDA.
-- **Deep learning models**: Bi‑LSTM, Bi‑GRU, Bi‑RNN with pre‑trained or learned embeddings.
-- **Ensembles**: hard‑voting ensembles (ML_ENS, DL_ENS, ALL_ENS).
-- **Transformer models**: BERT, ClinicalBERT, BioBERT (optional).
-- **Evaluation**: comprehensive metrics (accuracy, precision, recall, F1, AUC, confusion matrices), visualisation, statistical significance testing (bootstrap).
+- Data processing: loading, labeling (binary/ternary/10‑class), text cleaning, stemming, stopword removal.
+- Feature extraction: Bag‑of‑Words, TF‑IDF, n‑grams, averaged word embeddings (GloVe, PubMed, concatenated), sequence embeddings for deep models.
+- Traditional ML models: Logistic Regression, SVM (linear/RBF), Random Forest, XGBoost, Naïve Bayes, k‑NN, LDA.
+- Deep learning models: Bi‑LSTM, Bi‑GRU, Bi‑RNN with pre‑trained or learned embeddings.
+- Ensembles: hard‑voting ensembles (ML_ENS, DL_ENS, ALL_ENS).
+- Transformer models: BERT, ClinicalBERT, BioBERT (optional).
+- Evaluation: comprehensive metrics (accuracy, precision, recall, F1, AUC, confusion matrices), visualisation, statistical significance testing (bootstrap).
 
-All **32 tables** from the thesis chapter can be reproduced exactly by running the provided experiment scripts.
-
----
-
-\\ 📖 Table of Contents
-
-- [Installation](\installation)
-- [Data Preparation](\data-preparation)
-- [Package Structure](\package-structure)
-- [Running Experiments](\running-experiments)
-- [Reproducing Specific Tables](\reproducing-specific-tables)
-- [Results Summary](\results-summary)
-- [Extending the Framework](\extending-the-framework)
-- [Troubleshooting](\troubleshooting)
-- [Citation](\citation)
-- [License](\license)
-- [Acknowledgements](\acknowledgements)
+All 32 tables from the thesis chapter can be reproduced exactly by running the provided experiment scripts.
 
 ---
 
-\\ 🚀 Installation
+## 📖 Table of Contents
 
-\\\ 1. Clone the repository
+- [Installation](#installation)
+- [Data Preparation](#data-preparation)
+- [Package Structure](#package-structure)
+- [Running Experiments](#running-experiments)
+- [Reproducing Specific Tables](#reproducing-specific-tables)
+- [Results Summary](#results-summary)
+- [Extending the Framework](#extending-the-framework)
+- [Troubleshooting](#troubleshooting)
+- [Citation](#citation)
+- [License](#license)
+- [Acknowledgements](#acknowledgements)
+
+---
+
+## 🚀 Installation
+
+### 1. Clone the repository
 ```bash
 git clone https://github.com/yamenetoo/medsent.git
 cd medsent
 ```
 
-\\\ 2. Create a virtual environment (recommended)
+### 2. Create a virtual environment (recommended)
 ```bash
 python -m venv venv
-source venv/bin/activate      \ Linux/macOS
-\ or .\venv\Scripts\activate  \ Windows
+source venv/bin/activate      # Linux/macOS
+# or .\venv\Scripts\activate  # Windows
 ```
 
-\\\ 3. Install dependencies
+### 3. Install dependencies
 ```bash
 pip install -r requirements.txt
 ```
@@ -64,96 +64,96 @@ This installs all necessary libraries: `numpy`, `pandas`, `scikit-learn`, `nltk`
 
 ---
 
-\\ 📁 Data Preparation
+## 📁 Data Preparation
 
-\\\ Drugs.com Review Dataset
+### Drugs.com Review Dataset
 
 The experiments use a publicly available dataset of medication reviews from Drugs.com.  
-**Format**: CSV file with columns `review` (text) and `rating` (integer 1–10).  
-**Place it at**: `data/drugscom_reviews.csv` (create the `data/` folder if needed).
+Format: CSV file with columns `review` (text) and `rating` (integer 1–10).  
+Place it at: `data/drugscom_reviews.csv` (create the `data/` folder if needed).
 
 You can download the dataset from the [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/datasets/Drug+Review+Dataset+%28Drugs.com%29) (file `drugsCom_raw.zip`). After extraction, the file `drugsComTrain_raw.csv` contains the reviews. You may need to rename it and keep only the `review` and `rating` columns.
 
-**Example preprocessing** (already handled by the package):
+Example preprocessing (already handled by the package):
 - Remove HTML tags, URLs, dosage mentions (e.g., "10mg").
 - Convert to lowercase.
 - Tokenize, remove stopwords, apply stemming (Porter).
 
-\\\ Pre‑trained Embeddings
+### Pre‑trained Embeddings
 
 For best performance, download the following embeddings and place them in the `embeddings/` folder.
 
-\\\\ GloVe (840B tokens, 300d)
+#### GloVe (840B tokens, 300d)
 - Download from [https://nlp.stanford.edu/projects/glove/](https://nlp.stanford.edu/projects/glove/) (file `glove.840B.300d.zip`).
 - Extract and convert to word2vec format (required by gensim):
   ```bash
   python -m gensim.scripts.glove2word2vec -i glove.840B.300d.txt -o embeddings/glove.840B.300d.w2v.txt
   ```
 
-\\\\ PubMed Word2Vec (300d)
+#### PubMed Word2Vec (300d)
 - Download from [http://evexdb.org/pmresources/vec-space-models/PubMed-shuffle-win-30.bin](http://evexdb.org/pmresources/vec-space-models/PubMed-shuffle-win-30.bin) (binary format).
 - Place the file directly: `embeddings/PubMed-shuffle-win-30.bin`.
 
-\\\\ (Optional) Clinical BERT / BioBERT
+#### (Optional) Clinical BERT / BioBERT
 If you wish to run transformer experiments, the models will be downloaded automatically by the `transformers` library the first time they are used.
 
 ---
 
-\\ 📦 Package Structure
+## 📦 Package Structure
 
 ```
 medsent/
 ├── __init__.py
-├── config.py                     \ Global paths, seeds, hyperparameters
+├── config.py                     # Global paths, seeds, hyperparameters
 ├── data/
-│   ├── loader.py                 \ Load CSV, label, split
-│   ├── labeling.py               \ Binary/ternary/10class labeling
-│   └── preprocessing.py           \ Text cleaning, stemming, stopwords
+│   ├── loader.py                 # Load CSV, label, split
+│   ├── labeling.py               # Binary/ternary/10class labeling
+│   └── preprocessing.py           # Text cleaning, stemming, stopwords
 ├── features/
-│   ├── bow.py                     \ BoW / TF‑IDF vectorizers
-│   ├── word2vec_train.py           \ Train Word2Vec on corpus
-│   ├── embeddings.py               \ Load pre‑trained, averaged, sequence prep
-│   └── char_cnn_prep.py            \ Character‑level tokenizer
+│   ├── bow.py                     # BoW / TF‑IDF vectorizers
+│   ├── word2vec_train.py           # Train Word2Vec on corpus
+│   ├── embeddings.py               # Load pre‑trained, averaged, sequence prep
+│   └── char_cnn_prep.py            # Character‑level tokenizer
 ├── models/
-│   ├── ml_models.py                \ ML models with grid search
-│   ├── dl_models.py                \ Bi‑LSTM / Bi‑GRU / Bi‑RNN
-│   ├── transformer_models.py        \ BERT, ClinicalBERT, BioBERT
-│   ├── char_cnn.py                  \ Character‑level CNN
-│   └── ensemble.py                  \ Hard/soft voting
+│   ├── ml_models.py                # ML models with grid search
+│   ├── dl_models.py                # Bi‑LSTM / Bi‑GRU / Bi‑RNN
+│   ├── transformer_models.py        # BERT, ClinicalBERT, BioBERT
+│   ├── char_cnn.py                  # Character‑level CNN
+│   └── ensemble.py                  # Hard/soft voting
 ├── evaluation/
-│   ├── metrics.py                   \ Accuracy, precision, recall, F1, AUC, CM
-│   ├── visualization.py              \ Confusion matrices, learning curves
-│   └── bootstrap.py                  \ Statistical significance test
+│   ├── metrics.py                   # Accuracy, precision, recall, F1, AUC, CM
+│   ├── visualization.py              # Confusion matrices, learning curves
+│   └── bootstrap.py                  # Statistical significance test
 ├── experiments/
 │   ├── __init__.py
-│   ├── binary/                       \ Tables 4.2 – 4.5
-│   ├── ternary/                       \ Tables 4.6 – 4.8
-│   ├── tenclass/                       \ Tables 4.9 – 4.10
-│   ├── ablation/                       \ Tables 4.11 – 4.18, 4.28
-│   ├── ensemble/                       \ Table 4.19
-│   ├── training_time/                   \ Table 4.20
-│   ├── inference_time/                   \ Table 4.21
-│   ├── cross_validation/                 \ Table 4.22
-│   ├── statistical_significance/         \ Table 4.23
-│   ├── transformer/                       \ Table 4.24
-│   ├── learning_curve/                     \ Table 4.25
-│   ├── svm_xgb_sensitivity/                 \ Tables 4.26 – 4.27
-│   ├── feature_importance/                   \ Table 4.29
-│   ├── per_condition/                         \ Table 4.30
-│   ├── text_length/                           \ Table 4.31
-│   └── char_cnn/                               \ Table 4.32
+│   ├── binary/                       # Tables 4.2 – 4.5
+│   ├── ternary/                       # Tables 4.6 – 4.8
+│   ├── tenclass/                       # Tables 4.9 – 4.10
+│   ├── ablation/                       # Tables 4.11 – 4.18, 4.28
+│   ├── ensemble/                       # Table 4.19
+│   ├── training_time/                   # Table 4.20
+│   ├── inference_time/                   # Table 4.21
+│   ├── cross_validation/                 # Table 4.22
+│   ├── statistical_significance/         # Table 4.23
+│   ├── transformer/                       # Table 4.24
+│   ├── learning_curve/                     # Table 4.25
+│   ├── svm_xgb_sensitivity/                 # Tables 4.26 – 4.27
+│   ├── feature_importance/                   # Table 4.29
+│   ├── per_condition/                         # Table 4.30
+│   ├── text_length/                           # Table 4.31
+│   └── char_cnn/                               # Table 4.32
 ├── utils/
-│   ├── helpers.py                    \ set_seed, save/load results
-│   └── logger.py                      \ Logging setup
-├── main.py                           \ Orchestrator – run all experiments
+│   ├── helpers.py                    # set_seed, save/load results
+│   └── logger.py                      # Logging setup
+├── main.py                           # Orchestrator – run all experiments
 └── requirements.txt
 ```
 
 ---
 
-\\ 🧪 Running Experiments
+## 🧪 Running Experiments
 
-\\\ Run all experiments (reproduce all 32 tables)
+### Run all experiments (reproduce all 32 tables)
 ```bash
 python -m medsent.main
 ```
@@ -164,7 +164,7 @@ This will sequentially execute every experiment, saving results to the `results/
 
 The script uses logging – you can monitor progress in the console and in `medsent.log`.
 
-\\\ Run a single experiment
+### Run a single experiment
 You can also import any experiment module and run it individually. For example, to reproduce Table 4.2 (binary all models):
 
 ```python
@@ -176,7 +176,7 @@ All experiment modules are located under `medsent/experiments/` and follow the n
 
 ---
 
-\\ 📊 Reproducing Specific Tables
+## 📊 Reproducing Specific Tables
 
 Below is the complete mapping of thesis tables to the corresponding experiment module. Each module contains a `run()` function that saves the table data (and optionally a figure) to the `results/` directory.
 
@@ -216,34 +216,34 @@ Below is the complete mapping of thesis tables to the corresponding experiment m
 
 ---
 
-\\ 📈 Results Summary
+## 📈 Results Summary
 
-The best‑performing model overall is **BioBERT**, achieving a binary macro F1 of **0.925**, closely followed by the deep ensemble **DL_ENS** with **0.912**. Concatenated clinical embeddings (GloVe+PubMed) consistently outperform individual sources. Detailed results are available in the output CSV files.
+The best‑performing model overall is BioBERT, achieving a binary macro F1 of 0.925, closely followed by the deep ensemble DL_ENS with 0.912. Concatenated clinical embeddings (GloVe+PubMed) consistently outperform individual sources. Detailed results are available in the output CSV files.
 
 ---
 
-\\ 🔧 Extending the Framework
+## 🔧 Extending the Framework
 
 You can easily add new models, features, or experiments.
 
-\\\ Adding a new ML model
+### Adding a new ML model
 1. Edit `medsent/models/ml_models.py`: add your model to the `models` dictionary and optionally a parameter grid.
 2. The model will automatically be available in experiments that loop over ML models (e.g., Table 4.2).
 
-\\\ Adding a new embedding source
+### Adding a new embedding source
 1. Place your embedding file (word2vec format) in the `embeddings/` folder.
 2. Add its path to `config.py` (e.g., `NEW_EMB_PATH`).
 3. Modify `medsent/features/embeddings.py` to load it and add functions for averaged/sequence representations.
 4. Update experiment scripts to include the new embedding in the comparisons.
 
-\\\ Creating a new experiment
+### Creating a new experiment
 1. Create a new Python file under the appropriate subdirectory in `experiments/`.
 2. Follow the pattern: load data, extract features, train models, evaluate, save results.
 3. Import and call it from `main.py` if you want it to run automatically.
 
 ---
 
-\\ ❗ Troubleshooting
+## ❗ Troubleshooting
 
 | Problem | Solution |
 |--------|----------|
@@ -255,7 +255,7 @@ You can easily add new models, features, or experiments.
 
 ---
 
-\\ 📖 Citation
+## 📖 Citation
 
 If you use this code or the methodology in your research, please cite the original thesis chapter:
 
@@ -270,28 +270,28 @@ If you use this code or the methodology in your research, please cite the origin
 
 ---
 
-\\ ⚖️ License
+## ⚖️ License
 
 This project is licensed under the MIT License – see the [LICENSE](LICENSE) file for details.
 
 ---
 
-\\ 🙏 Acknowledgements
+## 🙏 Acknowledgements
 
 We thank the developers of the open‑source libraries that made this work possible:
 
-- **NumPy, pandas** – data manipulation
-- **scikit‑learn** – traditional ML models and evaluation
-- **NLTK** – text preprocessing
-- **Gensim** – word2vec and embedding handling
-- **TensorFlow / Keras** – deep learning models
-- **XGBoost** – gradient boosting
-- **Matplotlib / Seaborn** – visualisation
-- **HuggingFace Transformers** – transformer models
-- **PyTorch** – backend for transformers
+- NumPy, pandas – data manipulation
+- scikit‑learn – traditional ML models and evaluation
+- NLTK – text preprocessing
+- Gensim – word2vec and embedding handling
+- TensorFlow / Keras – deep learning models
+- XGBoost – gradient boosting
+- Matplotlib / Seaborn – visualisation
+- HuggingFace Transformers – transformer models
+- PyTorch – backend for transformers
 
 We also acknowledge the creators of the Drugs.com dataset and the providers of the pre‑trained embeddings (GloVe, PubMed Word2Vec).
 
-For questions, issues, or contributions, please open an issue on GitHub or contact **Mohammad Yamen** at **yamenmohamad@tabrizu.ac.ir**.
+For questions, issues, or contributions, please open an issue on GitHub or contact Mohammad Yamen at yamenmohamad@tabrizu.ac.ir.
 ```
  
