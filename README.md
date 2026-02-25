@@ -1,13 +1,14 @@
-**medsent: A Comprehensive Framework for Sentiment Analysis of Medication Reviews**
+# **medsent: A Comprehensive Framework for Sentiment Analysis of Medication Reviews**
 
 Authors:   **Mohammad Yamen AL-Mohamad**
+
 Contact: yamenmohamad@tabrizu.ac.ir  
 
 This repository contains the official implementation of the methodology and experiments described in the thesis chapter *"Methodology and Experimental Results"*. The `medsent` package provides a modular, reproducible pipeline for predicting patient sentiment from free‑text medication reviews using a wide range of machine learning and deep learning models, including ensembles and transformer‑based architectures.
 
 ---
 
-📌 Overview
+# 📌 Overview
 
 The framework integrates:
 
@@ -23,7 +24,7 @@ All 32 tables from the thesis chapter can be reproduced exactly by running the p
 
 ---
 
- 📖 Table of Contents
+#  📖 Table of Contents
 
 - [Installation](installation)
 - [Data Preparation](data-preparation)
@@ -39,7 +40,7 @@ All 32 tables from the thesis chapter can be reproduced exactly by running the p
 
 ---
 
- 🚀 Installation
+ # 🚀 Installation
 
  1. Clone the repository
 ```bash
@@ -63,7 +64,7 @@ This installs all necessary libraries: `numpy`, `pandas`, `scikit-learn`, `nltk`
 
 ---
 
- 📁 Data Preparation
+#  📁 Data Preparation
 
  Drugs.com Review Dataset
 
@@ -94,7 +95,7 @@ If you wish to run transformer experiments, the models will be downloaded automa
 
 ---
 
- 📦 Package Structure
+ # 📦 Package Structure
 
 ```
 medsent/
@@ -146,7 +147,7 @@ medsent/
 
 ---
 
- 🧪 Running Experiments
+#  🧪 Running Experiments
 
  Run all experiments (reproduce all 32 tables)
 ```bash
@@ -171,7 +172,7 @@ All experiment modules are located under `medsent/experiments/` and follow the n
 
 ---
 
- 📊 Reproducing Specific Tables
+#  📊 Reproducing Specific Tables
 
 Below is the complete mapping of thesis tables to the corresponding experiment module. Each module contains a `run()` function that saves the table data (and optionally a figure) to the `results/` directory.
 
@@ -211,13 +212,13 @@ Below is the complete mapping of thesis tables to the corresponding experiment m
 
 ---
 
- 📈 Results Summary
+#  📈 Results Summary
 
 The best‑performing model overall is BioBERT, achieving a binary macro F1 of 0.925, closely followed by the deep ensemble DL_ENS with 0.912. Concatenated clinical embeddings (GloVe+PubMed) consistently outperform individual sources. Detailed results are available in the output CSV files.
 
 ---
 
- 🔧 Extending the Framework
+#  🔧 Extending the Framework
 
 You can easily add new models, features, or experiments.
 
@@ -238,7 +239,7 @@ You can easily add new models, features, or experiments.
 
 ---
 
- ❗ Troubleshooting
+#  ❗ Troubleshooting
 
 | Problem | Solution |
 |--------|----------|
@@ -250,7 +251,7 @@ You can easily add new models, features, or experiments.
 
 ---
 
- 📖 Citation
+#  📖 Citation
 
 If you use this code or the methodology in your research, please cite the original thesis chapter:
 
@@ -265,7 +266,7 @@ If you use this code or the methodology in your research, please cite the origin
 
 ---
 
- ⚖️ License
+ # ⚖️ License
 
 This project is licensed under the MIT License – see the [LICENSE](LICENSE) file for details.
 
