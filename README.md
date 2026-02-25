@@ -1,4 +1,3 @@
-```markdown
 **medsent: A Comprehensive Framework for Sentiment Analysis of Medication Reviews**
 
 Authors:   **Mohammad Yamen AL-Mohamad**
